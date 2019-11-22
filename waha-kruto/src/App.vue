@@ -1,13 +1,6 @@
 <template lang="pug">
   div(id="app")
-    .wrapper
-      header.header
-        .container Ваха круто
-      main.maincontent
-        .container
-          library
-      footer.footer 
-       .container очень круто
+    library
     
   
   
@@ -97,48 +90,6 @@ img {max-width: 100%;
 max-height: 100%;
 box-sizing: border-box;
 display: block}
-
-.wrapper {
-  width: 100%;
-  margin: 0 auto;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.container {
-  width: 90%;
-  margin: 0 auto
-}
-
-.header {
-  flex: 0 0 auto;
- font-family: 'Spectral SC', serif;
- font-weight: bold;
- font-size: 52rem;
- text-align: center;
- color: #fff;
- background-color: #000;
-}
-
-.maincontent {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
- 
-}
-
-.footer {
-    flex: 0 0 auto;
- font-family: 'Spectral SC', serif;
- font-weight: bold;
- font-size: 24rem;
- text-align: center;
- color: #fff;
- background-color: #000;
-}
 
 
 </style>

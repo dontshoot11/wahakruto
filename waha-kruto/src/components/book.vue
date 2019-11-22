@@ -1,11 +1,11 @@
 <template lang="pug">
   .book-card
     h2.book-card__name {{book.name}}
-    p.book-card__setting(@click="filterBySetting" v-if="isFilterApplied === false") {{book.setting}}
+    
     
     .book-card__picture-box(v-if="!showDescripiton" @click="switchDescription")
       img.book-card__pic(:src=`book.cover`)
-    .desctiption(v-if ="showDescripiton" @click="switchDescription") Блаблаблаблабла
+    .desctiption(v-if ="showDescripiton" @click="switchDescription")  {{book.description}}
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
       },
   methods:{
     switchDescription(){this.showDescripiton = !this.showDescripiton},
-    filterBySetting(){this.$emit('filterBySetting', this.book.setting)},
+    
     resetFilter(){this.$emit('resetFilter')}
   }
 }
@@ -41,10 +41,16 @@ export default {
 width: 100%;
 display: flex; 
 flex-direction: column;
-align-items: center}
-.book-card__picture-box{height: 100%; cursor:pointer}
+align-items: center;
+overflow: auto;}
+.book-card__name{font-weight: bold; font-size: 20rem}
+.book-card__picture-box{height: 100%; cursor:pointer; overflow: hidden;}
 .desctiption{height: 100%;width:100%; cursor: pointer;}
 .book-card__setting{cursor:pointer}
+.book-card__pic{max-height: 100%;
+width: auto
+
+}
 
 
 
