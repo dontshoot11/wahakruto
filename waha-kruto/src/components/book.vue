@@ -1,7 +1,8 @@
 <template lang="pug">
   .book-card
     h2.book-card__name {{book.name}}
-    p.book-card__setting {{book.setting}}
+    p.book-card__setting(@click="filterBySetting" v-if="isFilterApplied === false") {{book.setting}}
+    
     .book-card__picture-box(v-if="!showDescripiton" @click="switchDescription")
       img.book-card__pic(:src=`book.cover`)
     .desctiption(v-if ="showDescripiton" @click="switchDescription") Блаблаблаблабла
@@ -10,16 +11,27 @@
 <script>
 export default {
   props: {
-    book: {}
+    book: {},
+    isFiltered: Boolean
+  
   },
   data(){return {
-    showDescripiton: false
+    showDescripiton: false,
+    
+    
 
 
 
   }},
+  computed:{
+    isFilterApplied: function(){
+      return this.isFiltered
+      }
+      },
   methods:{
-    switchDescription(){this.showDescripiton = !this.showDescripiton}
+    switchDescription(){this.showDescripiton = !this.showDescripiton},
+    filterBySetting(){this.$emit('filterBySetting', this.book.setting)},
+    resetFilter(){this.$emit('resetFilter')}
   }
 }
 </script>
@@ -32,6 +44,7 @@ flex-direction: column;
 align-items: center}
 .book-card__picture-box{height: 100%; cursor:pointer}
 .desctiption{height: 100%;width:100%; cursor: pointer;}
+.book-card__setting{cursor:pointer}
 
 
 
