@@ -9,7 +9,7 @@
           ul.navigaton-list
             li.navigaton-list__item 
               .navigation-list__picture-box(@click="resetFilter")
-                img(src="../assets/aquilla.png")
+                img(src="https://i.imgur.com/H54pSDl.png")
             li.navigaton-list__item(@click="filterHeresy" :class="{ active: isHeresySelected }") Ересь Хоруса
             li.navigaton-list__item(@click = "filter40k" :class="{ active: is40kSelected }") 40К 
             li.navigaton-list__item Где я и что происходит
