@@ -4,7 +4,7 @@
     header.header
         .container
         .headline
-          h1.header__name Ваха круто
+          h1.header__name(@click="resetFilter") Ваха круто
           .open-navigation.button(@click="switchNavigation")
             .open-navigation__triangle.open-navigation__triangle--down(v-if="!openNavigation")
             .open-navigation__triangle.open-navigation__triangle--up(v-if="openNavigation")
@@ -14,12 +14,12 @@
         nav.navigation
           
           ul.navigaton-list(:class="{ navigationListOpened: openNavigation }")
-            li.navigaton-list__item 
-              .navigation-list__picture-box(@click="resetFilter")
-                img(src="https://i.imgur.com/H54pSDl.png")
+            li.navigaton-list__item(@click="resetFilter" :class="{ active: noFilterApplied }") Все книги
+             
+                
             li.navigaton-list__item(@click="filterHeresy" :class="{ active: isHeresySelected }") Ересь Хоруса
             li.navigaton-list__item(@click = "filter40k" :class="{ active: is40kSelected }") 40К 
-            li.navigaton-list__item Где я и что происходит
+            
 
     main.maincontent
         .container
@@ -30,7 +30,8 @@
                 li.books-list__item(v-for = "book in books" )
                     book(:book="book" )
     footer.footer 
-       .container очень круто
+       .container 
+        .disclaimer Где я и что происходит
 
     
 </template>
@@ -46,7 +47,8 @@ export default {
    
     isHeresySelected: false,
     is40kSelected: false,
-    openNavigation: false
+    openNavigation: false,
+    noFilterApplied: true
 
     }
  
@@ -61,7 +63,8 @@ export default {
            
      
             this.isHeresySelected = false;
-            this.is40kSelected = false
+            this.is40kSelected = false;
+            this.noFilterApplied = true
             
         },
         filterHeresy(){
@@ -69,14 +72,16 @@ export default {
             this.books = this.books.filter(books => books.setting === "Ересь Хоруса");
             this.setting = "Ересь Хоруса";
             this.isHeresySelected = true;
-            this.is40kSelected = false
+            this.is40kSelected = false;
+            this.noFilterApplied = false;
            },
         
         filter40k(){let data = require('../jsons/library.json'); this.books = data;
             this.books = this.books.filter(books => books.setting === "40K");
             this.setting = "40K";
             this.isHeresySelected = false;
-            this.is40kSelected = true
+            this.is40kSelected = true;
+            this.noFilterApplied = false;
             },
         switchNavigation(){this.openNavigation=!this.openNavigation}
 
@@ -109,11 +114,11 @@ export default {
  font-size: 56rem;
  text-align: center;
  color: #fff;
- background-color: #000;
+ background-color: #030706;
  
 }
 
-.header__name {line-height: 1em}
+.header__name {line-height: 1em; cursor: pointer}
 
 .header__description {
   font-size: 16rem;
@@ -127,6 +132,7 @@ export default {
   flex-direction: column;
   
   font-family: 'Spectral SC', serif;
+  background: #fffafa
  
 }
 
@@ -137,7 +143,7 @@ export default {
  font-size: 24rem;
  text-align: center;
  color: #fff;
- background-color: #000;
+ background-color: #030706;
 }
 
 .navigaton-list {display: flex; font-size: 14rem; width: 100%; justify-content: center; transition: 0.3s;
@@ -173,9 +179,14 @@ cursor: pointer;
     
 }
 
-.active {color:#d8a941;
+.active {
+color:#d8a941;
 border-left:2px solid #d8a941;
-@media (max-width: 560px) {border-left: none }}
+&:first-child{border-left: none};
+
+
+@media (max-width: 560px) {border-left: none };
+}
 
 .books-list__item {height: 500rem; width: 100%}
 
@@ -190,7 +201,7 @@ display: none;
   margin-right: 10rem;
 }}
 
-.navigationListOpened {height: 120rem;
+.navigationListOpened {height: 130rem;
 transition: 0.3s}
 
 
@@ -198,18 +209,18 @@ transition: 0.3s}
 .open-navigation__triangle--up {
 width: 0; 
 height: 0;
-border-left: 20rem solid transparent;
-border-right: 20rem solid transparent;
-border-bottom: 40rem solid #d8a941;
+border-left: 15rem solid transparent;
+border-right: 15rem solid transparent;
+border-bottom: 30rem solid #d8a941;
 cursor: pointer;
 
 }
 
 .open-navigation__triangle--down {width: 0; 
 height: 0;
-border-left: 20rem solid transparent;
-border-right: 20rem solid transparent;
-border-top: 40rem solid #d8a941;
+border-left: 15rem solid transparent;
+border-right: 15rem solid transparent;
+border-top: 30rem solid #d8a941;
 cursor: pointer;}
 
 .headline {display: flex;

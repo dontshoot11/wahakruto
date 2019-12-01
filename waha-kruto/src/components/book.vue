@@ -44,11 +44,20 @@ width: 100%;
 display: flex; 
 flex-direction: column;
 align-items: center;
-overflow: auto;}
+overflow: auto;
+background: #fffafa;
+color:#030706;
+
+padding: 10rem}
+.book-card__info {
+  background: #fffafa;
+  color: #030706;
+  padding: 10rem }
 .book-card__name{font-weight: bold; font-size: 20rem}
 .book-card__picture-box{max-height: 100%; cursor:pointer; overflow: hidden;}
 .desctiption{height: 100%;width:100%; cursor: pointer;}
-.book-card__description{margin-top: 15rem;}
+.book-card__description{margin-top: 15rem;
+}
 .book-card__pic{max-height: 100%;
 width: auto
 
