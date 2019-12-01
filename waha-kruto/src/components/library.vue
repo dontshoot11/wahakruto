@@ -3,10 +3,17 @@
 .wrapper
     header.header
         .container
-         h1.header__name Ваха круто
-         p.header__description Золотой пантеон книг по вархаммеру 
-         nav.navigation
-          ul.navigaton-list
+        .headline
+          h1.header__name Ваха круто
+          .open-navigation.button(@click="switchNavigation")
+            .open-navigation__triangle.open-navigation__triangle--down(v-if="!openNavigation")
+            .open-navigation__triangle.open-navigation__triangle--up(v-if="openNavigation")
+
+         
+        p.header__description Золотой пантеон книг по вархаммеру 
+        nav.navigation
+          
+          ul.navigaton-list(:class="{ navigationListOpened: openNavigation }")
             li.navigaton-list__item 
               .navigation-list__picture-box(@click="resetFilter")
                 img(src="https://i.imgur.com/H54pSDl.png")
@@ -16,12 +23,12 @@
 
     main.maincontent
         .container
-          .library
+          
             
         
             ul.books-list
-                li.books-list__item(v-for = "book in books" :isFiltered="isFiltered")
-                    book(:book="book" :isFiltered="isFiltered")
+                li.books-list__item(v-for = "book in books" )
+                    book(:book="book" )
     footer.footer 
        .container очень круто
 
@@ -39,6 +46,8 @@ export default {
    
     isHeresySelected: false,
     is40kSelected: false,
+    openNavigation: false
+
     }
  
     },
@@ -68,7 +77,8 @@ export default {
             this.setting = "40K";
             this.isHeresySelected = false;
             this.is40kSelected = true
-            }
+            },
+        switchNavigation(){this.openNavigation=!this.openNavigation}
 
     },
     
@@ -88,7 +98,8 @@ export default {
 
 .container {
   width: 90%;
-  margin: 0 auto
+  margin: 0 auto;
+  position: relative
 }
 
 .header {
@@ -106,7 +117,8 @@ export default {
 
 .header__description {
   font-size: 16rem;
-  color: #d8a941
+  color: #d8a941;
+  @media (max-width: 560px) {display: none}
 }
 
 .maincontent {
@@ -128,7 +140,13 @@ export default {
  background-color: #000;
 }
 
-.navigaton-list {display: flex; font-size: 14rem; width: 100%; justify-content: center;}
+.navigaton-list {display: flex; font-size: 14rem; width: 100%; justify-content: center; transition: 0.3s;
+@media (max-width: 560px) {
+  flex-direction: column;
+  height: 0;
+  overflow: hidden;
+  font-size: 20rem
+}}
 
 .navigaton-list__item {padding:0 20rem; border-left: 2px solid #fff;
 &:hover{color:#d8a941;
@@ -136,21 +154,65 @@ border-left:2px solid #d8a941}
 &:first-child{border-left: none;
 padding-left: 0};
 cursor: pointer;
+@media (max-width: 560px){padding: 0; border-left: none;
+&:hover {border-left: none}}
 
 }
 
-.navigation-list__picture-box {height: 20rem;}
+.navigation-list__picture-box {height: 20rem; display: flex; justify-content: center;}
 .books-list{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     grid-gap: 15rem;
     margin-top: 25rem;
+    @media (max-width: 768px) {grid-template-columns: 1fr 1fr
+      
+    };
+    @media (max-width: 569px) {grid-template-columns: 1fr}
     
 }
 
 .active {color:#d8a941;
-border-left:2px solid #d8a941}
+border-left:2px solid #d8a941;
+@media (max-width: 560px) {border-left: none }}
 
 .books-list__item {height: 500rem; width: 100%}
+
+.open-navigation { 
+display: none;
+
+
+@media (max-width: 560px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10rem;
+}}
+
+.navigationListOpened {height: 120rem;
+transition: 0.3s}
+
+
+
+.open-navigation__triangle--up {
+width: 0; 
+height: 0;
+border-left: 20rem solid transparent;
+border-right: 20rem solid transparent;
+border-bottom: 40rem solid #d8a941;
+cursor: pointer;
+
+}
+
+.open-navigation__triangle--down {width: 0; 
+height: 0;
+border-left: 20rem solid transparent;
+border-right: 20rem solid transparent;
+border-top: 40rem solid #d8a941;
+cursor: pointer;}
+
+.headline {display: flex;
+justify-content: center;
+@media (max-width: 560px) {justify-content: space-between}}
 </style>

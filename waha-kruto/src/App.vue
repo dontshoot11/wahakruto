@@ -79,7 +79,8 @@ table {
 }
 
 html {height: 100%;
-font-size: 1px}
+font-size: 1px;
+@media (max-width: 768px){font-size: 0.9px}}
 
 body 
 {height: 100%;
