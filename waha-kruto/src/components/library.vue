@@ -19,6 +19,10 @@
                 
             li.navigaton-list__item(@click="filterHeresy" :class="{ active: isHeresySelected }") Ересь Хоруса
             li.navigaton-list__item(@click = "filter40k" :class="{ active: is40kSelected }") 40К 
+            li.navigation-list__item
+              input.settings.settings--desktop(type="range" min="1" max="3" v-model="gridSetting")
+              input.settings.settings--mobile(type="range" min="1" max="2" v-model="gridSetting")
+           
             
 
     main.maincontent
@@ -26,7 +30,7 @@
           
             
         
-            ul.books-list
+            ul.books-list(:class="{ mediumGrid: currentGrid == 2, smallGrid: currentGrid == 1, hugeGrid: currentGrid == 3}" )
                 li.books-list__item(v-for = "book in books" )
                     book(:book="book" )
     footer.footer 
@@ -48,14 +52,26 @@ export default {
     isHeresySelected: false,
     is40kSelected: false,
     openNavigation: false,
-    noFilterApplied: true
+    noFilterApplied: true,
+    gridSetting:1,
+
 
     }
  
     },
+    computed:{
+    currentGrid: function(){
+      return this.gridSetting
+      }
+      },
+    
     created(){
-        let data = require('../jsons/library.json'); this.books = data
+        let data = require('../jsons/library.json'); this.books = data;
+      
+       
     },
+  
+    
     methods: {
    
         resetFilter(){
@@ -104,7 +120,8 @@ export default {
 .container {
   width: 90%;
   margin: 0 auto;
-  position: relative
+  position: relative;
+  @media (max-width:560px) {width: 99%}
 }
 
 .header {
@@ -158,7 +175,8 @@ export default {
 &:hover{color:#d8a941;
 border-left:2px solid #d8a941}
 &:first-child{border-left: none;
-padding-left: 0};
+padding-left: 0;
+};
 cursor: pointer;
 @media (max-width: 560px){padding: 0; border-left: none;
 &:hover {border-left: none}}
@@ -168,16 +186,36 @@ cursor: pointer;
 .navigation-list__picture-box {height: 20rem; display: flex; justify-content: center;}
 .books-list{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    
     justify-items: center;
     grid-gap: 15rem;
     margin-top: 25rem;
-    @media (max-width: 768px) {grid-template-columns: 1fr 1fr
-      
-    };
-    @media (max-width: 569px) {grid-template-columns: 1fr}
+    max-width: 100%;
+    overflow: hidden
+    
     
 }
+
+.mediumGrid{grid-template-columns: 1fr 1fr 1fr 1fr;
+@media (max-width: 768px) {grid-template-columns: 1fr 1fr 1fr
+      
+    };
+@media (max-width: 560px) {grid-template-columns: 1fr 1fr}}
+
+.smallGrid {grid-template-columns: 1fr 1fr 1fr;
+@media (max-width: 768px) {grid-template-columns: 1fr 1fr
+      
+    };
+@media (max-width: 560px) {grid-template-columns: 1fr}
+}
+
+.hugeGrid {grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+@media (max-width: 768px) {grid-template-columns: 1fr 1fr 1fr 1
+      
+    };
+@media (max-width: 560px) {grid-template-columns: 1fr 1fr 1fr}}
+
 
 .active {
 color:#d8a941;
@@ -188,7 +226,7 @@ border-left:2px solid #d8a941;
 @media (max-width: 560px) {border-left: none };
 }
 
-.books-list__item {height: 500rem; width: 100%}
+.books-list__item {height: 100%; width: 100%; }
 
 .open-navigation { 
 display: none;
@@ -226,4 +264,13 @@ cursor: pointer;}
 .headline {display: flex;
 justify-content: center;
 @media (max-width: 560px) {justify-content: space-between}}
+
+.settings--desktop {@media (max-width: 768px) {display: none
+      
+    };}
+.settings--mobile {display: none; @media (max-width: 768px) {display:block; margin: 0 auto
+      
+    };}
+
+
 </style>
