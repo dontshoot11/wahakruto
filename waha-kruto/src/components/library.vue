@@ -21,7 +21,9 @@
             li.navigaton-list__item(@click = "filter40k" :class="{ active: is40kSelected }") 40К 
             li.navigation-list__item
               input.settings.settings--desktop(type="range" min="1" max="3" v-model="gridSetting")
-              input.settings.settings--mobile(type="range" min="1" max="2" v-model="gridSetting")
+              .settings--mobile
+                input.settings__radio(type="radio" value="1" name="mobileButton" v-model="gridSetting")
+                input.settings__radio(type="radio" value="2" name="mobileButton" v-model="gridSetting")
            
             
 
@@ -36,6 +38,19 @@
     footer.footer 
        .container 
         .disclaimer Где я и что происходит
+          .disclaimer-popup 
+            .disclaimer-popup__logo
+              img(src="https://i.imgur.com/H54pSDl.png").disclaimer-popup__picture
+            .disclaimer-popup__description
+              p.disclaimer-popup__text Вархаммер - удивительная фантастическая вселенная. Если рассматривать художественную литературу, то, по-сути, она производится как на конвейере, по четкому плану, сугубо для поддержания продаж настольных игр. Однако, так уж случилось, что над книгами работает команда очень талантливых авторов, которым раз за разом получается презвойти самих себя и издавать, без шуток, выдающиеся произведения.
+              
+              p.disclaimer-popup__text Я - просто ноунейм из интернета, без претензии на что-то вообще, решил собрать, скорее для себя, лучшие из лучших. 
+              p.disclaimer-popup__text Эта страничка вряд ли будет часто обновляться, потому что здесь собраны действительно самые-самые произведения, 10 из 10, вархаммер на кончиках пальцев.
+              a(href="https://twitter.com/temahuema").disclaimer-popup__link если вы вдруг хотите посоветовать мне что-то, то можете написать в личные сообщения в твиттере, например.
+
+
+
+
 
     
 </template>
@@ -161,7 +176,48 @@ export default {
  text-align: center;
  color: #fff;
  background-color: #030706;
+ position: relative
 }
+.disclaimer {cursor: pointer; transition: 0.3s;
+text-align: end}
+.disclaimer:hover {color: #d8a941; transition: 0.3s}
+.disclaimer-popup {
+  visibility: hidden;
+  bottom:100%;
+  right: 0;
+ 
+  position: absolute;
+  font-size: 14rem;
+  font-weight: normal;
+  width: 30%;
+  padding: 10rem;
+  @media (max-width: 768px) { width: 66%
+    
+  };
+   @media (max-width: 560px) { width: 90%
+    
+  } }
+.disclaimer:hover .disclaimer-popup {
+  position: absolute;
+  visibility: visible;
+
+  right: 0;
+  background-color: #030706;
+ 
+  color: #fffafa;
+  
+ 
+
+
+
+  }
+
+.disclaimer-popup__logo { display: flex; justify-content: start;}
+.disclaimer-popup__picture {width: 20%}
+.disclaimer-popup__link{color:#fffafa;
+&:hover{color: #d8a941}}
+
+
 
 .navigaton-list {display: flex; font-size: 14rem; width: 100%; justify-content: center; transition: 0.3s;
 @media (max-width: 560px) {
@@ -188,7 +244,7 @@ cursor: pointer;
     display: grid;
     
     justify-items: center;
-    grid-gap: 15rem;
+    grid-gap: 5rem;
     margin-top: 25rem;
     max-width: 100%;
     overflow: hidden
@@ -240,7 +296,7 @@ display: none;
 }}
 
 .navigationListOpened {height: 130rem;
-transition: 0.3s}
+transition: 0.3s; margin-top: 10rem;}
 
 
 
@@ -268,7 +324,7 @@ justify-content: center;
 .settings--desktop {@media (max-width: 768px) {display: none
       
     };}
-.settings--mobile {display: none; @media (max-width: 768px) {display:block; margin: 0 auto
+.settings--mobile {display: none; @media (max-width: 768px) {display:flex; justify-content: space-around; width: 50%; margin: 0 auto
       
     };}
 

@@ -47,10 +47,10 @@ export default {
 .book-card{height: 100%;
 width: 100%;
 display: flex;
-
 flex-direction: column;
-align-items: center;
-overflow: auto;
+justify-content: flex-start;
+
+
 background: #fffafa;
 color:#030706;
 cursor: pointer;
@@ -92,8 +92,12 @@ cursor: pointer;
     width: 95%;   height: 95%;
     }}
 
-.book-card__name{font-weight: bold; font-size: 20rem}
-.book-card__picture-box{height: 100%; cursor:pointer; overflow: hidden; padding: 25rem; max-height: 550rem; flex-shrink: 1; overflow: hidden; display: flex; align-items: center}
+.book-card__name{font-weight: bold; font-size: 18rem; text-align: center; line-height: 1em; word-wrap:break-word;}
+.book-card__picture-box{
+  height: 100%; cursor:pointer; overflow: hidden;
+  margin-bottom: 5rem; max-height: 550rem;
+  overflow: hidden; display: flex; align-items: flex-start; justify-content: center;
+  flex-basis: 80%}
 .desctiption{height: 100%;width:100%; cursor: pointer;}
 .book-card__description{margin-top: 15rem; 
 @media (max-width: 320px) {line-height: 1.1em}
