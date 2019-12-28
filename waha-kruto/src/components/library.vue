@@ -20,10 +20,9 @@
             li.navigaton-list__item(@click="filterHeresy" :class="{ active: isHeresySelected }") Ересь Хоруса
             li.navigaton-list__item(@click = "filter40k" :class="{ active: is40kSelected }") 40К 
             li.navigation-list__item
-              input.settings.settings--desktop(type="range" min="1" max="3" v-model="gridSetting")
-              .settings--mobile
-                input.settings__radio(type="radio" value="1" name="mobileButton" v-model="gridSetting")
-                input.settings__radio(type="radio" value="2" name="mobileButton" v-model="gridSetting")
+              input.settings.settings--desktop.settings__slider(type="range" min="1" max="3" v-model="gridSetting")
+              input.settings.settings--mobile.settings__slider(type="range" min="1" max="2" v-model="gridSetting")
+ 
            
             
 
@@ -213,7 +212,7 @@ text-align: end}
   }
 
 .disclaimer-popup__logo { display: flex; justify-content: start;}
-.disclaimer-popup__picture {width: 20%}
+.disclaimer-popup__picture {width: 20%; height: 20%;}
 .disclaimer-popup__link{color:#fffafa;
 &:hover{color: #d8a941}}
 
@@ -238,7 +237,7 @@ cursor: pointer;
 &:hover {border-left: none}}
 
 }
-
+.navigaton-list {margin: 10rem auto}
 .navigation-list__picture-box {height: 20rem; display: flex; justify-content: center;}
 .books-list{
     display: grid;
@@ -319,14 +318,67 @@ cursor: pointer;}
 
 .headline {display: flex;
 justify-content: center;
+
+
 @media (max-width: 560px) {justify-content: space-between}}
 
 .settings--desktop {@media (max-width: 768px) {display: none
       
     };}
-.settings--mobile {display: none; @media (max-width: 768px) {display:flex; justify-content: space-around; width: 50%; margin: 0 auto
+.settings--mobile {display: none; @media (max-width: 768px) {display:flex; justify-content: space-around; width: 75%; margin: 10rem auto
       
-    };}
+    };
+    @media (max-width: 480px) {width: 33%}}
+
+.settings__slider {
+  -webkit-appearance: none;
+
+  height: 1rem;
+  outline: none;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  background: -webkit-linear-gradient(left,  #fff 0%, #d8a941 50%,);
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 30rem;
+    width: 30rem;
+    color: #000;
+     background-color: transparent;
+    border:none;
+    outline: none;
+    
+    background-image: url('https://i.imgur.com/2DYstX7.png');
+    background-size: contain;
+    background-position:  center;
+    cursor: pointer;
+   
+    
+  };
+  &::-moz-range-thumb { -moz-appearance: none;
+    height: 30rem;
+    width: 30rem;
+    color: #000;
+    
+    background-image: url('https://i.imgur.com/2DYstX7.png');
+    background-color: transparent;
+    border:none;
+    outline: none;
+    background-size: contain;
+    background-position:  center;
+    cursor: pointer;}
+  &::-ms-thumb {
+    height: 30rem;
+    width: 30rem;
+    color: #000;
+    
+    background-image: url('https://i.imgur.com/2DYstX7.png');
+    background-color: transparent;
+    border:none;
+    outline: none;
+    background-size: contain;
+    background-position:  center;
+    cursor: pointer;}
+}
 
 
 </style>
